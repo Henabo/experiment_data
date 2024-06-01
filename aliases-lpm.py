@@ -59,12 +59,12 @@ def main(aliased_file_path, non_aliased_file_path, experiment_path, seed_id):
                     try:
                         # print(line + "," + tree[line])
                         # 将非别名地址写入其中
-                        if tree[line].split(",")[1] == "0":
-                            non_aliased_count += 1
-                            file.write(line + "\n")
-                        else:
+                        if tree[line].split(",")[1] == "1":
                             aliased_count += 1
                             print("别名地址" + line + "-----" + tree[line])
+                        else:
+                            non_aliased_count += 1
+                            file.write(line + "\n")
                         # file.write(line + "-----" + tree[line] + "\n")
                     except KeyError as e:
                         dont_know_count += 1
@@ -80,14 +80,14 @@ if __name__ == "__main__":
     # ipaddress_file = f"6Forest/inference_{seed_id}.txt"
 
     # 真实数据
-    # aliased_file = "data/aliased-prefixes.txt"
-    # non_aliased_file = "data/non-aliased-prefixes.txt"
+    aliased_file = "data/aliased-prefixes.txt"
+    non_aliased_file = "data/non-aliased-prefixes.txt"
 
     # # 测试使用数据
-    aliased_file = "test/aliased-prefixes.txt"
-    non_aliased_file = "test/non-aliased-prefixes.txt"
+    # aliased_file = "test/aliased-prefixes.txt"
+    # non_aliased_file = "test/non-aliased-prefixes.txt"
 
     # 实验路径，目前就两个
-    # experiment_path = ["6Forest/", "6Tree/", "DET/", "6Diffusion/"]
-    experiment_path = ["test/"]
+    experiment_path = ["6Forest/", "6Tree/", "DET/", "6Diffusion/"]
+    # experiment_path = ["6Tree/"]
     main(aliased_file, non_aliased_file, experiment_path, seed_id)

@@ -46,7 +46,7 @@ def main(aliased_file_path, non_aliased_file_path, experiment_path, seed_id):
 
     print("Matching IP addresses...")
     # Read IP address file, match each address to longest prefix and print output
-    aliased_count, non_aliased_count, dont_know_count = 0, 0, 0
+    aliased_count, non_aliased_count = 0, 0
     for experiment in experiment_path:
         save_file_path = experiment + f"inference_nonaliased_{seed_id}.txt"
         ip_address_file = experiment + f"inference_{seed_id}.txt"
@@ -66,11 +66,13 @@ def main(aliased_file_path, non_aliased_file_path, experiment_path, seed_id):
                             # file.write(line + "\n")
                         # file.write(line + "-----" + tree[line] + "\n")
                     except KeyError as e:
-                        dont_know_count += 1
+                        non_aliased_count += 1
+                        file.write(line + "\n")
                         # print("Skipped line '" + line + "'", file=sys.stderr)
-    print("别名地址数量：", aliased_count)
-    print("非别名地址数量：", non_aliased_count)
-    print("不知道地址数量：", dont_know_count)
+        print(experiment)
+        print("别名地址数量：", aliased_count)
+        print("非别名地址数量：", non_aliased_count)
+        aliased_count, non_aliased_count = 0, 0
     print("--------finished!---------")
 
 
@@ -87,6 +89,6 @@ if __name__ == "__main__":
     # non_aliased_file = "test/non-aliased-prefixes.txt"
 
     # 实验路径，目前就两个
-    # experiment_path = ["6Forest/", "6Tree/", "DET/", "6Diffusion/"]
-    experiment_path = ["6Tree/"]
+    experiment_path = ["6Forest/", "6Tree/", "DET/", "6Diffusion/"]
+    # experiment_path = ["6Tree/"]
     main(aliased_file, non_aliased_file, experiment_path, seed_id)
