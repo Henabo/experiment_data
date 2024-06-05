@@ -4,7 +4,7 @@ import ipaddress
 def read_ip_addresses(file_path):
     """读取文件中的IP地址并返回一个集合"""
     with open(file_path, 'r', encoding='utf-8') as file:
-        ip_addresses = {ipaddress.ip_address(line.strip()) for line in file}
+        ip_addresses = {ipaddress.ip_address(line.strip()).exploded for line in file}
     return ip_addresses
 
 
@@ -35,6 +35,6 @@ def main(seed_file_path, input_file_path, output_file_path):
 
 if __name__ == "__main__":
     seed_file = 'seed/seed_1.txt'  # 种子集合文件路径
-    input_file = '6Forest/active_1.txt'  # 输入文件路径
-    output_file = '6Forest/gen_1.txt'  # 输出文件路径
+    input_file = 'entropy/active_standardized_active_inference_1.txt'  # 输入文件路径
+    output_file = 'entropy/gen_1.txt'  # 输出文件路径
     main(seed_file, input_file, output_file)
